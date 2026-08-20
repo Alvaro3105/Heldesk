@@ -10,6 +10,15 @@ def listar_chamados():
     return jsonify(ChamadoService.listar_chamados()), 200
 
 
+@chamado_bp.route("/chamados/<int:chamado_id>", methods=["GET"])
+def buscar_chamado(chamado_id):
+    try:
+        chamado = ChamadoService.buscar_chamado(chamado_id)
+        return jsonify(chamado.to_dict()), 200
+    except ValueError as erro:
+        return jsonify({"erro": str(erro)}), 404
+
+
 @chamado_bp.route("/chamados", methods=["POST"])
 def criar_chamado():
     dados = request.get_json(silent=True) or {}
