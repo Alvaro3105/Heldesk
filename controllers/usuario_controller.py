@@ -10,6 +10,15 @@ def listar_usuarios():
     return jsonify(UsuarioService.listar_usuarios()), 200
 
 
+@usuario_bp.route("/usuarios/<int:usuario_id>", methods=["GET"])
+def buscar_usuario(usuario_id):
+    try:
+        usuario = UsuarioService.buscar_usuario(usuario_id)
+        return jsonify(usuario.to_dict()), 200
+    except ValueError as erro:
+        return jsonify({"erro": str(erro)}), 404
+
+
 @usuario_bp.route("/usuarios", methods=["POST"])
 def criar_usuario():
     dados = request.get_json(silent=True) or {}
@@ -37,8 +46,14 @@ def excluir_usuario(usuario_id):
         UsuarioService.excluir_usuario(usuario_id)
         return "", 204
     except ValueError as erro:
-        status = 404 if "não encontrado" in str(erro) else 400
-        return jsonify({"erro": str(erro)}), status
+        mensagem = str(erro)
+        if "não encontrado" in mensagem:
+            status = 404
+        elif "possui chamados" in mensagem:
+            status = 409
+        else:
+            status = 400
+        return jsonify({"erro": mensagem}), status
 
 
 @usuario_bp.route("/usuarios/<int:usuario_id>/chamados", methods=["GET"])
