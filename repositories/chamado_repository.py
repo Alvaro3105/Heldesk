@@ -9,7 +9,7 @@ class ChamadoRepository:
 
     @staticmethod
     def buscar_por_id(chamado_id):
-        return Chamado.query.get(chamado_id)
+        return db.session.get(Chamado, chamado_id)
 
     @staticmethod
     def listar_por_usuario(usuario_id):
