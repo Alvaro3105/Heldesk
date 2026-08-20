@@ -9,7 +9,7 @@ class UsuarioRepository:
 
     @staticmethod
     def buscar_por_id(usuario_id):
-        return Usuario.query.get(usuario_id)
+        return db.session.get(Usuario, usuario_id)
 
     @staticmethod
     def buscar_por_email(email):
