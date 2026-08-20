@@ -35,13 +35,13 @@ class UsuarioService:
     def atualizar_usuario(usuario_id, dados: dict) -> Usuario:
         usuario = UsuarioService.buscar_usuario(usuario_id)
 
-        nome = dados.get("nome", usuario.nome)
-        email = dados.get("email", usuario.email)
+        nome = str(dados.get("nome", usuario.nome) or "").strip()
+        email = str(dados.get("email", usuario.email) or "").strip()
         setor = dados.get("setor", usuario.setor)
 
-        if not nome or not str(nome).strip():
+        if not nome:
             raise ValueError("Nome é obrigatório")
-        if not email or not str(email).strip():
+        if not email:
             raise ValueError("E-mail é obrigatório")
 
         email_dono = UsuarioRepository.buscar_por_email(email)
@@ -65,5 +65,5 @@ class UsuarioService:
 
     @staticmethod
     def listar_chamados_do_usuario(usuario_id):
-        UsuarioService.buscar_usuario(usuario_id) 
+        UsuarioService.buscar_usuario(usuario_id)
         return [c.to_dict() for c in ChamadoRepository.listar_por_usuario(usuario_id)]
