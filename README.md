@@ -138,8 +138,6 @@ git clone https://github.com/Alvaro3105/Heldesk.git
 cd Heldesk
 ```
 
-> Depois que o repositório for renomeado para `Helpdesk`, utilize o novo endereço no comando acima.
-
 ### 2. Crie o ambiente virtual
 
 Windows PowerShell:
@@ -246,5 +244,6 @@ Os testes cobrem o fluxo principal da API, validações de chamado e o bloqueio 
 
 **Álvaro Pires de Souza**
 
+- Portfólio: [alvaro3105.github.io/Portfolio](https://alvaro3105.github.io/Portfolio/)
 - GitHub: [Alvaro3105](https://github.com/Alvaro3105)
 - LinkedIn: [alvaro-pires-de-souza](https://www.linkedin.com/in/alvaro-pires-de-souza/)
